@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Batalha G30 - Outubro</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.block { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #18181b; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #f97316; }
+    </style>
+</head>
+<body class="bg-zinc-100 text-zinc-900 h-screen overflow-hidden flex flex-col md:flex-row selection:bg-orange-500 selection:text-white">
+
+    <!-- Sidebar -->
+    <aside class="w-full md:w-72 bg-zinc-950 text-zinc-400 flex-shrink-0 flex flex-col border-r border-zinc-900 relative z-20 h-auto md:h-screen overflow-y-auto">
+        <div class="p-6 border-b border-zinc-900">
+            <h1 class="text-2xl font-black text-white tracking-tighter">
+                MÉTODO <span class="text-orange-500">G30</span>
+            </h1>
+            <p class="text-xs uppercase tracking-widest mt-1 text-zinc-500">Inteligência de Vendas</p>
+        </div>
+
+        <!-- Gideão IA Banner -->
+        <div class="p-4 border-b border-zinc-900 hidden md:block">
+            <a href="https://app.g30.ai/gideao-ia" target="_blank" rel="noreferrer" class="block group relative overflow-hidden rounded-lg border border-zinc-800 hover:border-orange-500 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
+                <img src="https://raw.githubusercontent.com/G30IA/playbookdeexpansao/9558ba2d62e4c14aa85abe9977dfcd7ccdd36ca9/gideao-hero-DT4MCh5v.jpeg" alt="Gideão IA" class="w-full h-24 object-cover object-top group-hover:scale-110 transition-transform duration-500" />
+                <div class="absolute bottom-0 left-0 p-3 z-20 w-full">
+                    <div class="text-xs font-bold text-orange-400 uppercase tracking-widest mb-1 flex items-center gap-1">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Online
+                    </div>
+                    <div class="text-white text-sm font-semibold flex items-center justify-between">
+                        Falar com Gideão IA <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Menu Navigation -->
+        <nav class="flex-1 py-6 px-3 flex gap-2 overflow-x-auto md:flex-col md:overflow-visible">
+            <button data-tab="overview" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all bg-orange-500/10 text-orange-500 whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0"></i> Visão Geral
+            </button>
+            <button data-tab="mapa" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:bg-zinc-900 hover:text-white whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="phone-call" class="w-5 h-5 shrink-0"></i> Método M.A.P.A.
+            </button>
+            <button data-tab="funil" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:bg-zinc-900 hover:text-white whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="filter" class="w-5 h-5 shrink-0"></i> Funil de Vendas
+            </button>
+            <button data-tab="live" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:bg-zinc-900 hover:text-white whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="radio" class="w-5 h-5 shrink-0 text-red-500"></i> Live de Sábado
+            </button>
+            <button data-tab="gideao-copy" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:bg-zinc-900 hover:text-white whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="bot" class="w-5 h-5 shrink-0 text-orange-400"></i> Gerador de Copy
+            </button>
+            <button data-tab="action-plan" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-zinc-400 hover:bg-zinc-900 hover:text-white whitespace-nowrap md:whitespace-normal">
+                <i data-lucide="list-todo" class="w-5 h-5 shrink-0"></i> Plano de Ação
+            </button>
+        </nav>
+
+        <!-- Configuração da Loja (Editável) -->
+        <div class="hidden md:flex p-6 border-t border-zinc-900 items-center gap-3 mt-auto">
+            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-orange-500 border border-zinc-700 shrink-0">
+                <i data-lucide="store" class="w-5 h-5"></i>
+            </div>
+            <div class="w-full relative group">
+                <input 
+                    type="text" 
+                    id="storeNameInput"
+                    placeholder="Nome da sua Loja..." 
+                    class="bg-transparent text-sm text-zinc-200 font-medium w-full focus:outline-none focus:border-b focus:border-orange-500 pb-1 pr-6 truncate transition-colors"
+                />
+                <i data-lucide="pencil" class="w-3 h-3 text-zinc-600 absolute right-1 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto w-full flex flex-col bg-zinc-50 relative">
+        
+        <!-- Header Banner -->
+        <div class="w-full h-40 md:h-64 lg:h-80 shrink-0 bg-zinc-950 overflow-hidden relative">
+            <img src="https://raw.githubusercontent.com/G30IA/playbookdeexpansao/9558ba2d62e4c14aa85abe9977dfcd7ccdd36ca9/gideao-hero-DT4MCh5v.jpeg" alt="Banner Gideão IA" class="w-full h-full object-cover object-[center_20%] shadow-inner opacity-80" />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-50 via-transparent to-transparent"></div>
+        </div>
+
+        <div class="p-6 md:p-10 lg:p-14 max-w-7xl mx-auto w-full -mt-16 md:-mt-24 relative z-10">
+            <!-- Cabeçalho Global -->
+            <header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-zinc-200 pb-6 bg-zinc-50/80 backdrop-blur-md p-4 md:p-6 rounded-2xl shadow-sm">
+                <div>
+                    <h2 class="text-sm font-bold text-orange-600 uppercase tracking-widest mb-1">PDV (Plano de Vendas) de Outubro</h2>
+                    <h3 class="text-3xl font-black text-zinc-900 tracking-tight">Plano de Batalha G30</h3>
+                </div>
+                
+                <a href="https://app.g30.ai/gideao-ia" target="_blank" rel="noreferrer" class="flex items-center gap-3 bg-white border border-zinc-200 py-2 px-4 rounded-full shadow-sm hover:shadow hover:border-orange-200 transition-all group shrink-0">
+                    <div class="relative">
+                        <img src="https://raw.githubusercontent.com/G30IA/playbookdeexpansao/9558ba2d62e4c14aa85abe9977dfcd7ccdd36ca9/gideao-hero-DT4MCh5v.jpeg" alt="Gideão" class="w-8 h-8 rounded-full object-cover" />
+                        <span class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <span class="text-sm font-bold text-zinc-700 group-hover:text-orange-600 transition-colors">Abrir Gideão IA</span>
+                </a>
+            </header>
+
+            <!-- Tab Content: Visão Geral -->
+            <div id="tab-overview" class="tab-content space-y-8 block">
+                
+                <!-- Calendário do Mês - Setembro Oficial -->
+                <div class="bg-zinc-950 border border-zinc-900 rounded-2xl p-4 md:p-6 shadow-xl relative overflow-hidden group">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-zinc-900">
+                        <div class="bg-orange-500/10 text-orange-400 border border-orange-500/30 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-2">
+                            <i data-lucide="calendar-days" class="w-4 h-4 text-orange-500"></i> Calendário Oficial de Postagens & Eventos - Outubro
+                        </div>
+                    </div>
+                    <div class="w-full rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-inner flex justify-center">
+                        <img 
+                            src="https://raw.githubusercontent.com/G30IA/PDVSetembro/c84a88b39e86f2a1166fecf9cadaefc88373e5a6/calendariosetembro.jpeg" 
+                            alt="Calendário do Mês de Outubro - G30" 
+                            class="w-full h-auto object-contain max-h-[600px] hover:scale-[1.01] transition-transform duration-500" 
+                        />
+                    </div>
+                </div>
+
+                <!-- Banner Principal - Estratégia G30 Outubro -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-8 text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <i data-lucide="target" style="width: 120px; height: 120px;"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="inline-block py-1 px-3 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-wider uppercase mb-3 border border-orange-500/30">
+                            Estratégia Global - Outubro (Aceleração do Q4)
+                        </span>
+                        <h3 class="text-3xl font-black mb-3">PDV (Plano de Vendas) de Outubro</h3>
+                        <p class="text-zinc-400 max-w-3xl leading-relaxed text-lg mb-2">
+                            Outubro marca o <strong class="text-orange-400">Início Forte do Q4</strong>. É o momento de engajar com campanhas temáticas (Dia das Crianças e Halloween), promover conscientização (Outubro Rosa) e antecipar as grandes negociações do fim do ano oferecendo vantagens para quem fechar negócio antes da alta de preços.
+                        </p>
+                        <p class="text-xs text-zinc-500 uppercase tracking-widest font-semibold">* O Plano de Batalha de Execução</p>
+                    </div>
+                </div>
+
+                <!-- Bloco Especial: As 4 Grandes Oportunidades Sazonais de Outubro -->
+                <div class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-zinc-200">
+                        <div class="p-3 bg-orange-500/10 text-orange-600 rounded-xl">
+                            <i data-lucide="sparkles" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-black text-zinc-900">4 Grandes Campanhas Sazonais de Outubro</h3>
+                            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider">Cronograma de Triggers Comerciais para Acelerar a Loja</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Card 1 -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-5 hover:border-pink-400 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black bg-pink-500 text-white px-2 py-0.5 rounded uppercase">01 a 31/10</span>
+                                    <i data-lucide="heart" class="w-4 h-4 text-pink-500"></i>
+                                </div>
+                                <h4 class="font-extrabold text-zinc-900 text-base mb-1">Outubro Rosa</h4>
+                                <p class="text-xs font-bold text-pink-600 mb-3">"Acelere na Prevenção"</p>
+                                <p class="text-xs text-zinc-600 leading-relaxed mb-4">Campanha de conscientização. Poste conteúdos informativos e, se possível, reverta parte das vendas para instituições de combate ao câncer de mama.</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider border-t border-zinc-200 pt-2 block">Foco: Social & Conscientização</span>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-5 hover:border-blue-400 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black bg-blue-500 text-white px-2 py-0.5 rounded uppercase">07 a 12/10</span>
+                                    <i data-lucide="baby" class="w-4 h-4 text-blue-500"></i>
+                                </div>
+                                <h4 class="font-extrabold text-zinc-900 text-base mb-1">Dia das Crianças</h4>
+                                <p class="text-xs font-bold text-blue-600 mb-3">"Conforto e Segurança pra Família"</p>
+                                <p class="text-xs text-zinc-600 leading-relaxed mb-4">Destaque SUVs, sedans espaçosos e carros familiares. Crie conteúdo sobre segurança no transporte infantil para gerar autoridade e atrair pais.</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider border-t border-zinc-200 pt-2 block">Foco: Venda para Famílias</span>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-5 hover:border-orange-400 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black bg-orange-500 text-white px-2 py-0.5 rounded uppercase">13 a 24/10</span>
+                                    <i data-lucide="fast-forward" class="w-4 h-4 text-orange-500"></i>
+                                </div>
+                                <h4 class="font-extrabold text-zinc-900 text-base mb-1">Promoções Antecipadas</h4>
+                                <p class="text-xs font-bold text-orange-600 mb-3">"Saia na Frente do Fim de Ano"</p>
+                                <p class="text-xs text-zinc-600 leading-relaxed mb-4">Gatilho de antecipação. Ofereça benefícios para quem trocar o carro antigo pelo seminovo agora, antes da correria e alta de preços de dezembro.</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider border-t border-zinc-200 pt-2 block">Foco: Fechamento & Troca</span>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-5 hover:border-purple-500 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-[10px] font-black bg-purple-600 text-white px-2 py-0.5 rounded uppercase">25 a 31/10</span>
+                                    <i data-lucide="ghost" class="w-4 h-4 text-purple-600"></i>
+                                </div>
+                                <h4 class="font-extrabold text-zinc-900 text-base mb-1">Halloween de Ofertas</h4>
+                                <p class="text-xs font-bold text-purple-600 mb-3">"Descontos Assustadores"</p>
+                                <p class="text-xs text-zinc-600 leading-relaxed mb-4">Semana temática. Use as redes sociais para engajar com concursos ou decorações de Halloween. Libere bônus agressivos para queima de estoque.</p>
+                            </div>
+                            <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider border-t border-zinc-200 pt-2 block">Foco: Engajamento & Queima</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner Leadway (Gideão Marketing) -->
+                <div class="relative rounded-xl p-8 shadow-xl overflow-hidden group border border-zinc-800">
+                    <!-- Imagem de Fundo & Overlay -->
+                    <div class="absolute inset-0 z-0">
+                        <img 
+                            src="https://raw.githubusercontent.com/G30IA/PDVagosto/4af607c1b59279ea42aa46a84336e953ffd32f70/image.png" 
+                            alt="Leadway Background" 
+                            class="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700 blur-[2px] group-hover:blur-none"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/90 to-transparent"></div>
+                    </div>
+                    
+                    <!-- Conteúdo -->
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 text-blue-400 text-[10px] font-bold tracking-wider uppercase mb-3 border border-blue-500/30">
+                            Inteligência de Tráfego Pago
+                        </span>
+                        <h3 class="text-3xl font-black text-white mb-3">Otimize suas Campanhas com a Leadway</h3>
+                        <p class="text-zinc-300 mb-6 leading-relaxed text-lg">
+                            Use a funcionalidade Leadway do Gideão para auditar e otimizar todo o seu tráfego pago automaticamente para a campanha de Outubro. 
+                        </p>
+                        
+                        <div class="mb-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-sm text-yellow-100 backdrop-blur-sm">
+                            <strong class="text-yellow-500 flex items-center gap-2 mb-1">
+                                <i data-lucide="alert-triangle" class="w-4 h-4"></i> Importante:
+                            </strong>
+                            Lembre-se de conectar-se ao META no canto inferior esquerdo para o Gideão analisar suas campanhas de tráfego. Se tiver alguma dúvida desse processo, entre em contato com o suporte.
+                        </div>
+                        
+                        <a href="https://app.g30.ai/marketing" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(37,99,235,0.5)]">
+                            <i data-lucide="external-link" class="w-5 h-5"></i> Acessar Leadway
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Inteligência de Mercado: Outubro (FENAUTO) -->
+                <div class="bg-gradient-to-br from-zinc-50 to-zinc-100 border border-zinc-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4 border-b border-zinc-200 pb-4">
+                        <div class="p-2 bg-orange-100 text-orange-600 rounded-lg">
+                            <i data-lucide="trending-up" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-zinc-900 text-lg">Inteligência de Mercado: O Cenário de Outubro</h3>
+                            <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider">Dados consolidados do mercado FENAUTO (~1,5 Mi veículos/mês)</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-zinc-800 flex items-center gap-2"><i data-lucide="users" class="w-4 h-4 text-orange-500"></i> Decisão Familiar</h4>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Com o Dia das Crianças, o apelo emocional para viagens seguras e confortáveis em família aumenta. É a hora de focar em porta-malas, ISOFIX e espaço interno.</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-zinc-800 flex items-center gap-2"><i data-lucide="fast-forward" class="w-4 h-4 text-orange-500"></i> Fuga do Reajuste</h4>
+                            <p class="text-sm text-zinc-600 leading-relaxed">Clientes qualificados já estão buscando trocar de carro para evitar a valorização tradicional da tabela FIPE e as taxas mais altas das financeiras no fim de ano (Nov/Dez).</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-zinc-800 flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-orange-500"></i> Conexão e Propósito</h4>
+                            <p class="text-sm text-zinc-600 leading-relaxed">O Outubro Rosa permite à loja humanizar a marca. Clientes, especialmente o público feminino, valorizam empresas engajadas em causas sociais reais e preventivas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulador de Metas Destacado -->
+                <div class="bg-zinc-950 border border-orange-500/50 rounded-2xl p-8 shadow-[0_0_40px_-10px_rgba(249,115,22,0.3)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5">
+                        <i data-lucide="calculator" style="width: 150px; height: 150px; color: white;"></i>
+                    </div>
+                    
+                    <div class="relative z-10 mb-8">
+                        <h3 class="text-2xl font-black text-white flex items-center gap-3">
+                            <i data-lucide="calculator" class="w-6 h-6 text-orange-500"></i>
+                            Simulador de Metas (Funil Reverso - Outubro)
+                        </h3>
+                        <p class="text-sm text-zinc-400 mt-2">Calcule o esforço necessário na base para atingir sua meta de vendas no mês de Outubro, considerando a taxa de comparência e no-show (50%).</p>
+                    </div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row gap-6 items-center mb-10 bg-zinc-900/80 p-6 rounded-xl border border-zinc-800 backdrop-blur-sm">
+                        <div class="w-full md:w-1/3">
+                            <label class="block text-sm font-bold text-zinc-400 mb-2 uppercase tracking-wider">Sua Meta de Vendas (Outubro)</label>
+                            <input 
+                                type="number" 
+                                id="targetSalesInput"
+                                value="10"
+                                min="0"
+                                class="w-full bg-zinc-950 border-2 border-zinc-700 text-orange-500 text-4xl font-black rounded-lg p-4 text-center focus:border-orange-500 focus:outline-none transition-colors shadow-inner"
+                            />
+                        </div>
+                        <div class="w-full md:w-2/3 flex items-center justify-center p-4 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-200 text-sm font-medium leading-relaxed">
+                            <i data-lucide="info" class="w-5 h-5 mr-3 shrink-0 text-orange-500"></i>
+                            Ajuste a meta ao lado. O algoritmo recalculará automaticamente os KPIs diários (Leads, Agendamentos e Visitas) necessários para garantir esse resultado na mesa.
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- Leads -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6 text-center hover:-translate-y-1 transition-transform duration-300 shadow-lg">
+                            <div class="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-2">Leads Necessários</div>
+                            <div class="text-4xl font-black text-white" id="valLeads">700</div>
+                            <div class="text-[10px] text-zinc-500 mt-2 font-medium bg-zinc-950 py-1 rounded border border-zinc-800">TOPO DE FUNIL</div>
+                        </div>
+                        
+                        <!-- Agendamentos -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6 text-center hover:-translate-y-1 transition-transform duration-300 shadow-lg relative">
+                            <div class="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-2">Agendamentos</div>
+                            <div class="text-4xl font-black text-white" id="valAppointments">70</div>
+                            <div class="text-[10px] text-orange-400 mt-2 font-medium bg-orange-500/10 py-1 rounded border border-orange-500/20">CONTANDO 50% NO-SHOW</div>
+                        </div>
+
+                        <!-- Visitas -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6 text-center hover:-translate-y-1 transition-transform duration-300 shadow-lg">
+                            <div class="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-2">Visitas na Loja</div>
+                            <div class="text-4xl font-black text-white" id="valVisits">35</div>
+                            <div class="text-[10px] text-zinc-500 mt-2 font-medium bg-zinc-950 py-1 rounded border border-zinc-800">COMPARECIMENTO REAL</div>
+                        </div>
+
+                        <!-- Vendas -->
+                        <div class="bg-gradient-to-br from-orange-500 to-orange-700 border-none rounded-xl p-6 text-center transform scale-105 shadow-[0_10px_20px_-5px_rgba(249,115,22,0.5)] flex flex-col justify-center">
+                            <div class="text-orange-100 text-xs font-bold uppercase tracking-widest mb-2 shadow-sm">Vendas Fechadas</div>
+                            <div class="text-5xl font-black text-white drop-shadow-md" id="valSales">10</div>
+                            <div class="text-[10px] text-orange-100 mt-2 font-bold bg-black/20 py-1 rounded uppercase tracking-wider">Fundo de Funil</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção Especial: Copys Sazonais para WhatsApp em Outubro -->
+                <div class="bg-gradient-to-r from-zinc-900 to-zinc-950 p-6 rounded-xl border border-zinc-800 text-white shadow-lg">
+                    <h4 class="text-lg font-black text-white mb-4 flex items-center gap-2">
+                        <i data-lucide="message-square" class="w-5 h-5 text-orange-500"></i> Copys Prontas de WhatsApp para Resgate em Outubro
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-zinc-900 p-4 rounded-lg border border-zinc-800">
+                            <span class="text-[10px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded uppercase">Resgate - Foco Família (Dia das Crianças)</span>
+                            <p class="text-xs text-zinc-300 mt-2 italic leading-relaxed">
+                                "Olá, [Nome]! Tudo bem? Lembrei de você porque sei que busca um carro seguro e espaçoso para a família. Aproveitando o mês das crianças, liberamos uma condição com **superavaliação na troca e IPVA grátis** para modelos SUV/Sedan. Que tal testar o espaço desse carro hoje à tarde ou amanhã de manhã com a gente?"
+                            </p>
+                        </div>
+                        <div class="bg-zinc-900 p-4 rounded-lg border border-zinc-800">
+                            <span class="text-[10px] font-bold bg-purple-600 text-white px-2 py-0.5 rounded uppercase">Antecipação Fim de Ano (Halloween)</span>
+                            <p class="text-xs text-zinc-300 mt-2 italic leading-relaxed">
+                                "[Nome], quer fugir dos sustos com os preços altos do fim de ano? Selecionamos alguns veículos no nosso pátio com **Descontos Assustadores** válidos só até este fim de semana. Consigo segurar essa taxa especial de antecipação pra você avaliar. Fica melhor passar aqui na quinta ou sexta-feira?"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acelerador de Rotina + Áudio -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Protocolo 4 Passos e Áudio -->
+                    <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-800 text-white shadow-lg">
+                        <h4 class="text-xl font-black text-white mb-6 flex items-center gap-3">
+                            <i data-lucide="zap" class="w-6 h-6 text-orange-500"></i> Acelerador da Rotina Diária
+                        </h4>
+                        
+                        <p class="text-sm text-zinc-400 mb-6 font-semibold">Passo a passo dos pontos de contato para Resgate de Leads. Faça nessa ordem:</p>
+                        
+                        <ul class="space-y-4 text-sm text-zinc-300">
+                            <li class="flex items-start gap-3 bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+                                <span class="bg-orange-500 text-white font-bold w-6 h-6 rounded flex items-center justify-center shrink-0">1</span>
+                                <div><strong class="text-white">3 Ligações Tradicionais:</strong> Seguidas até cair na caixa postal, uma atrás da outra para ativar o gatilho de urgência.</div>
+                            </li>
+                            <li class="flex items-start gap-3 bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+                                <span class="bg-orange-500 text-white font-bold w-6 h-6 rounded flex items-center justify-center shrink-0">2</span>
+                                <div><strong class="text-white">1 Chamada de Vídeo:</strong> Direto no WhatsApp para ativar o gatilho de quebra de padrão.</div>
+                            </li>
+                            <li class="flex items-start gap-3 bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+                                <span class="bg-orange-500 text-white font-bold w-6 h-6 rounded flex items-center justify-center shrink-0">3</span>
+                                <div><strong class="text-white">Vídeo "Bolinha":</strong> "[Nome], me ajuda aqui... te liguei 3x porque vi que clicou no anúncio do seminovo, mas não sei se já comprou ou busca condição. Dá retorno?"</div>
+                            </li>
+                            <li class="flex items-start gap-3 bg-zinc-950 p-3 rounded-lg border border-zinc-800">
+                                <span class="bg-orange-500 text-white font-bold w-6 h-6 rounded flex items-center justify-center shrink-0">4</span>
+                                <div><strong class="text-white">Áudio Mudo (10s):</strong> Após 3 horas sem resposta. Enviar a mensagem escrita: "(nome) você acha que faz sentido para você?"</div>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-xs font-bold text-center">
+                            * Após realizar esses 4 pontos, desista do lead naquele dia.
+                        </div>
+
+                        <!-- Player de Áudio - GITHUB RAW -->
+                        <div class="mt-8 border-t border-zinc-800 pt-6">
+                            <h4 class="text-sm font-bold text-orange-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                                <i data-lucide="headphones" class="w-4 h-4"></i> Ouça o Exemplo Prático (Áudio)
+                            </h4>
+                            <div class="bg-zinc-800 rounded-xl p-4 shadow-inner border border-zinc-700">
+                                <audio controls class="w-full">
+                                    <source src="https://raw.githubusercontent.com/G30IA/PDVagosto/1fb0b3c224905b009f4448f92ed0bfaeb3ae52fa/OUT-LojistaTeste-TEL-5534991272052-DT-20260513-HR-1232-CALLID-67e949ba4b714d348fbbf935535bfa52.mp3" type="audio/mpeg">
+                                    Seu navegador não suporta o elemento de áudio.
+                                </audio>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10 Mensagens de Acompanhamento -->
+                    <div class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm flex flex-col h-full">
+                        <h4 class="text-xl font-black text-zinc-900 mb-2">10 Mensagens de Follow-up</h4>
+                        <p class="text-xs text-zinc-500 mb-6 uppercase font-bold tracking-wider">Acompanhamento do Método MAPA</p>
+                        
+                        <div class="space-y-3 overflow-y-auto pr-2 custom-scrollbar flex-1" style="max-height: 450px;">
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">1. Clareza direta:</strong> "[Nome], me ajuda aqui, tô organizando meus atendimentos. Você ainda tá avaliando comprar ou já resolveu?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">2. Prioridade (tempo):</strong> "[Nome], ainda é prioridade pra você comprar agora ou ficou pra mais pra frente?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">3. Ativa dor (impacto):</strong> "[Nome], muita gente adia e continua com o mesmo problema no carro. Ainda tá te incomodando?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">4. Emocional + futuro:</strong> "[Nome], se você resolver aquele ponto que te incomoda, isso melhora seu dia a dia hoje?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">5. Posicionamento (sim/não):</strong> "[Nome], você prefere comprar agora ou deixar pra quando ficar mais urgente?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">6. Quebra de padrão:</strong> "[Nome], posso ser direto contigo pra respeitar teu tempo? Você ainda tá no jogo pra comprar?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">7. Sem pressão (confiança):</strong> "[Nome], não quero te incomodar. Só entender se faz sentido eu seguir te ajudando."
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">8. Decisão com condição:</strong> "[Nome], se aparecer uma condição que encaixe no seu orçamento, você avançaria agora?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">9. Autoridade (quem decide):</strong> "[Nome], hoje depende só de você ou precisa alinhar com alguém pra bater o martelo?"
+                            </div>
+                            <div class="p-3 bg-zinc-50 border border-zinc-100 rounded-lg text-sm text-zinc-600">
+                                <strong class="text-zinc-900">10. Final definitivo (mata e ressuscita):</strong> "[Nome], vou encerrar seu atendimento por aqui. Se fizer sentido retomar, me chama que será uma honra ajudar."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Funil de Vendas -->
+            <div id="tab-funil" class="tab-content hidden space-y-6">
+                <!-- Arquitetura do Funil -->
+                <div class="bg-white border border-zinc-200 rounded-xl p-8 shadow-sm relative overflow-hidden mb-8">
+                    <h3 class="text-2xl font-black text-zinc-900 mb-2 flex items-center gap-3">
+                        <i data-lucide="filter" class="w-7 h-7 text-orange-500"></i> Arquitetura do Funil de Vendas G30
+                    </h3>
+                    <p class="text-zinc-500 mb-8 max-w-3xl">
+                        Entenda a jornada exata que o cliente percorre. Cada etapa tem um objetivo único e uma estratégia definida. Se uma etapa falhar, o cliente não desce para a próxima.
+                    </p>
+
+                    <div class="space-y-4 relative">
+                        <!-- Linha conectora vertical -->
+                        <div class="absolute left-1/2 top-0 bottom-0 w-1 bg-zinc-100 -translate-x-1/2 z-0 hidden md:block"></div>
+
+                        <!-- Topo de Funil -->
+                        <div class="relative z-10 bg-zinc-950 border border-zinc-900 rounded-xl p-6 md:w-3/4 mx-auto shadow-lg">
+                            <div class="absolute -top-3 -right-3 bg-zinc-800 text-zinc-300 text-xs font-bold px-3 py-1 rounded-full border border-zinc-700">Volume Máximo</div>
+                            <div class="flex flex-col md:flex-row items-center gap-6">
+                                <div class="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 border-2 border-zinc-800 shrink-0">
+                                    <i data-lucide="users" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Topo de Funil: Atração & Descoberta</h4>
+                                    <p class="text-sm text-zinc-400 mb-3">O objetivo aqui não é vender, é <strong>chamar atenção</strong> e gerar o Lead.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs bg-zinc-900 border border-zinc-800 text-zinc-300 px-2 py-1 rounded">Tráfego Pago (Anúncios)</span>
+                                        <span class="text-xs bg-zinc-900 border border-zinc-800 text-zinc-300 px-2 py-1 rounded">Vídeos Orgânicos de Bastidores</span>
+                                        <span class="text-xs bg-zinc-900 border border-zinc-800 text-zinc-300 px-2 py-1 rounded">Instagram</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Meio de Funil -->
+                        <div class="relative z-10 bg-zinc-900 border border-zinc-800 rounded-xl p-6 md:w-2/3 mx-auto shadow-lg mt-4">
+                            <div class="flex flex-col md:flex-row items-center gap-6">
+                                <div class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center text-orange-400 border-2 border-zinc-700 shrink-0">
+                                    <i data-lucide="phone-call" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white mb-1">Meio de Funil: Consideração & Qualificação</h4>
+                                    <p class="text-sm text-zinc-400 mb-3">O lead chegou. O objetivo agora é <strong>qualificar e agendar a visita</strong> (resgate de leads).</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs bg-zinc-800 border border-zinc-700 text-orange-300 px-2 py-1 rounded">Aplicação do Método MAPA</span>
+                                        <span class="text-xs bg-zinc-800 border border-zinc-700 text-orange-300 px-2 py-1 rounded">Ligações de Resgate</span>
+                                        <span class="text-xs bg-zinc-800 border border-zinc-700 text-orange-300 px-2 py-1 rounded">Quebra de Objeções Prévias</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fundo de Funil -->
+                        <div class="relative z-10 bg-orange-500/10 border-2 border-orange-500/50 rounded-xl p-6 md:w-1/2 mx-auto shadow-xl mt-4">
+                            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">Venda Realizada</div>
+                            <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                                <div class="w-16 h-16 mx-auto md:mx-0 rounded-full bg-orange-500 flex items-center justify-center text-white shrink-0 shadow-inner">
+                                    <i data-lucide="target" class="w-7 h-7"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-orange-500 mb-1">Fundo de Funil: Decisão & Fechamento</h4>
+                                    <p class="text-sm text-zinc-700 mb-3">O cliente pisou na loja. O objetivo é a <strong>experiência, test drive e contrato</strong>.</p>
+                                    <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                                        <span class="text-xs bg-white/60 border border-orange-200 text-orange-700 font-medium px-2 py-1 rounded">Recepção de Impacto</span>
+                                        <span class="text-xs bg-white/60 border border-orange-200 text-orange-700 font-medium px-2 py-1 rounded">Aprovação de Crédito</span>
+                                        <span class="text-xs bg-white/60 border border-orange-200 text-orange-700 font-medium px-2 py-1 rounded">Fechamento</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orgânico vs Pago (Vídeos) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Tráfego Orgânico -->
+                    <div class="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-zinc-100">
+                            <div class="w-10 h-10 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-900">
+                                <i data-lucide="video" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-zinc-900 text-lg">Conteúdo Orgânico (Instagram)</h3>
+                                <p class="text-xs text-zinc-500 uppercase tracking-wider font-semibold">Atração e Autoridade (Topo/Meio de Funil)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-lg bg-zinc-50 border border-zinc-100 hover:border-orange-200 transition-colors">
+                                <h4 class="font-bold text-zinc-800 text-sm mb-1 flex items-center gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-orange-500"></i> 1. Bastidores da Loja (Transparência)
+                                </h4>
+                                <p class="text-sm text-zinc-600">Mostre a rotina real. O recebimento de novos veículos, a rotina de vendedores e de organização da loja para novas vendas, dicas do dia a dia menos editadas, mostrando todo profissionalismo do motivo porque a loja é a melhor da região.</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-zinc-50 border border-zinc-100 hover:border-orange-200 transition-colors">
+                                <h4 class="font-bold text-zinc-800 text-sm mb-1 flex items-center gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-orange-500"></i> 2. Histórias de Entrega (Prova Social)
+                                </h4>
+                                <p class="text-sm text-zinc-600 mb-3">Grave o momento ápice da entrega e use as 3 perguntas chaves:</p>
+                                <div class="bg-white p-3 rounded border border-zinc-200 text-xs text-zinc-700 italic">
+                                    "[Nome da loja] realizando mais um sonho, tô aqui com [nome do cliente] que adquiriu um carro novo..."
+                                    <ul class="mt-2 space-y-1 font-semibold not-italic">
+                                        <li>1 - Como você conheceu a loja?</li>
+                                        <li>2 - Como foi o atendimento desde que conheceu até a realização do sonho?</li>
+                                        <li>3 - A pergunta que não quer calar: vocês indicam a [nome da loja]?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Vídeos Embutidos de Exemplo -->
+                            <div class="pt-4 border-t border-zinc-100">
+                                <h4 class="font-bold text-zinc-800 text-sm mb-3">3. Conteúdo de Alto Valor (Exemplos)</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <!-- Vídeo 1 (Score) -->
+                                    <div class="bg-zinc-100 rounded-lg overflow-hidden border border-zinc-200 shadow-sm relative pt-[120%]">
+                                        <iframe src="https://www.instagram.com/p/DPWMRV_AL6F/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                    </div>
+                                    <!-- Vídeo 2 (Motivos para Trocar) -->
+                                    <div class="bg-zinc-100 rounded-lg overflow-hidden border border-zinc-200 shadow-sm relative pt-[120%]">
+                                        <iframe src="https://www.instagram.com/p/DVOsAizkWbr/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tráfego Pago -->
+                    <div class="bg-zinc-950 border border-zinc-900 rounded-xl p-6 shadow-sm text-white">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-zinc-800">
+                            <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-500">
+                                <i data-lucide="target" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Tráfego Pago (Vídeos de Vendas)</h3>
+                                <p class="text-xs text-orange-500 uppercase tracking-wider font-semibold">Conversão e Leads (Fundo de Funil)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <!-- Anúncio 1 -->
+                            <div class="flex flex-col sm:flex-row gap-4 p-4 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 transition-colors">
+                                <div class="w-full sm:w-1/3 shrink-0 rounded-md overflow-hidden bg-zinc-950 border border-zinc-800 relative pt-[70%] sm:pt-[50%]">
+                                     <iframe src="https://www.instagram.com/p/DaaXH7Whkbr/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                </div>
+                                <div class="w-full sm:w-2/3">
+                                    <h4 class="font-bold text-zinc-100 text-sm mb-1 flex items-center gap-2">
+                                        <i data-lucide="alert-circle" class="w-4 h-4 text-orange-500"></i> Anúncio 1: A Dor do Cliente
+                                    </h4>
+                                    <p class="text-xs text-zinc-400 mt-1"><span class="text-orange-400 font-semibold">Foco:</span> Bater na dor da manutenção do carro antigo ou transporte público. Ofertar seminovo com garantia.</p>
+                                </div>
+                            </div>
+
+                            <!-- Anúncio 2 -->
+                            <div class="flex flex-col sm:flex-row gap-4 p-4 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 transition-colors">
+                                <div class="w-full sm:w-1/3 shrink-0 rounded-md overflow-hidden bg-zinc-950 border border-zinc-800 relative pt-[70%] sm:pt-[50%]">
+                                     <iframe src="https://www.instagram.com/p/C9Amt1Jp76U/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                </div>
+                                <div class="w-full sm:w-2/3">
+                                    <h4 class="font-bold text-zinc-100 text-sm mb-1 flex items-center gap-2">
+                                        <i data-lucide="alert-circle" class="w-4 h-4 text-orange-500"></i> Anúncio 2: Oportunidade de Setembro
+                                    </h4>
+                                    <p class="text-xs text-zinc-400 mt-1"><span class="text-orange-400 font-semibold">Foco:</span> Pátio cheio e antecipação de fim de ano. Ofertas relâmpago de veículos 100% revisados e periciados.</p>
+                                </div>
+                            </div>
+
+                            <!-- Anúncio 3 -->
+                            <div class="flex flex-col sm:flex-row gap-4 p-4 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500/50 transition-colors">
+                                <div class="w-full sm:w-1/3 shrink-0 rounded-md overflow-hidden bg-zinc-950 border border-zinc-800 relative pt-[70%] sm:pt-[50%]">
+                                     <iframe src="https://www.instagram.com/p/DAQxAcJpRVC/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                                </div>
+                                <div class="w-full sm:w-2/3">
+                                    <h4 class="font-bold text-zinc-100 text-sm mb-1 flex items-center gap-2">
+                                        <i data-lucide="alert-circle" class="w-4 h-4 text-orange-500"></i> Anúncio 3: Chamada Direta
+                                    </h4>
+                                    <p class="text-xs text-zinc-400 mt-1"><span class="text-orange-400 font-semibold">Foco:</span> Urgência total. Plantão de Vendas rolando, taxas imbatíveis. Botão direto pro WhatsApp para aprovação em 15 min.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Live de Sábado -->
+            <div id="tab-live" class="tab-content hidden space-y-6">
+                <!-- Cabeçalho Live -->
+                <div class="bg-red-600 border border-red-700 rounded-xl p-8 text-white shadow-[0_10px_30px_-10px_rgba(220,38,38,0.5)] relative overflow-hidden">
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 opacity-20">
+                        <i data-lucide="radio" style="width: 180px; height: 180px;"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-black/20 text-white text-xs font-bold tracking-wider uppercase mb-3 border border-white/20">
+                            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Evento Principal
+                        </span>
+                        <h3 class="text-3xl font-black mb-2">Live de Sábado (10h)</h3>
+                        <p class="text-red-100 text-lg max-w-2xl">
+                            O pico de conversão da semana. 15 minutos intensos de ofertas irresistíveis e escassez real para quem estiver ao vivo.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Checklist Operacional -->
+                    <div class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm">
+                        <h4 class="text-xl font-black text-zinc-900 mb-6 flex items-center gap-2 border-b border-zinc-100 pb-4">
+                            <i data-lucide="list-checks" class="text-red-500 w-6 h-6"></i> Checklist de Execução
+                        </h4>
+
+                        <div class="space-y-6 text-sm text-zinc-700">
+                            <!-- Bloco 1 -->
+                            <div>
+                                <h5 class="font-bold text-zinc-900 bg-zinc-100 px-3 py-1 rounded inline-block mb-3">1. Divulgação (Início: Terça-feira)</h5>
+                                <ul class="space-y-2 pl-2">
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Story + Feed com copy emocional.</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Reforçar nos stories todos os dias até sábado.</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Lembrar da contagem regressiva e botão "Lembrete".</span></li>
+                                </ul>
+                            </div>
+
+                            <!-- Bloco 2 -->
+                            <div>
+                                <h5 class="font-bold text-zinc-900 bg-zinc-100 px-3 py-1 rounded inline-block mb-3">2. Preparação (Sexta à Tarde/Sábado Cedo)</h5>
+                                <ul class="space-y-2 pl-2">
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Separar 3 veículos com ofertas reais e atrativas.</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Definir gatilhos: urgência, escassez, emoção.</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Verificar iluminação, conexão e local de gravação.</span></li>
+                                </ul>
+                            </div>
+
+                            <!-- Bloco 3 -->
+                            <div>
+                                <h5 class="font-bold text-zinc-900 bg-zinc-100 px-3 py-1 rounded inline-block mb-3">3. Durante a Live (10h - máx 15min)</h5>
+                                <ul class="space-y-2 pl-2">
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Apresentar os 3 veículos com destaque nos diferenciais.</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Chamada para ação (ir para o direct ou visitar a loja).</span></li>
+                                    <li class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-red-500 w-4 h-4"> <span>Revelar surpresa (ex: brinde, condição especial).</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Convites e Vídeo -->
+                    <div class="space-y-6">
+                        <!-- Copys prontas -->
+                        <div class="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
+                            <h4 class="font-bold text-zinc-900 text-sm mb-3 uppercase tracking-wider">Copys de Convite (Stories)</h4>
+                            
+                            <div class="bg-red-50 border-l-4 border-l-red-500 p-4 rounded-r-lg mb-4 text-sm text-zinc-700 italic">
+                                "Sentei com meu financeiro e eles estão dizendo que eu vou quebrar! [...] são apenas 10 minutos de live com 3 ofertas e uma surpresa especial!"
+                            </div>
+                            
+                            <div class="bg-red-50 border-l-4 border-l-red-500 p-4 rounded-r-lg text-sm text-zinc-700 italic">
+                                "O seu carro tem dia e hora marcada pra chegar na sua garagem, e é nesse sábado com a super live de ofertas da [nome da loja], às 10 horas da manhã eu vou liberar por 15 minutos ofertas diferentes, especiais, só pra quem estiver ao vivo. Então coloca na tua agenda. Sábado, 10 horas da manhã."
+                            </div>
+                        </div>
+
+                        <!-- Vídeo Exemplo Embutido -->
+                        <div class="bg-zinc-100 rounded-xl border border-zinc-200 p-4">
+                            <h4 class="font-bold text-zinc-900 text-sm mb-3 flex items-center gap-2">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-red-500"></i> Exemplo Prático de Convite
+                            </h4>
+                            <div class="rounded-lg overflow-hidden relative pt-[70%] sm:pt-[56.25%] bg-zinc-950">
+                                <iframe src="https://www.instagram.com/p/DWRQZSIDUpv/embed/" class="absolute top-0 left-0 w-full h-full" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Gerador de Copy -->
+            <div id="tab-gideao-copy" class="tab-content hidden space-y-6">
+                <!-- Cabeçalho -->
+                <div class="bg-gradient-to-r from-zinc-900 to-zinc-950 border border-zinc-800 rounded-xl p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="relative z-10 w-full md:w-2/3">
+                        <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-500/20 text-orange-400 text-xs font-bold tracking-wider uppercase mb-3 border border-orange-500/30">
+                            Engenharia de Prompt
+                        </span>
+                        <h3 class="text-3xl font-black mb-2 text-white">Gerador de Copy (Gideão)</h3>
+                        <p class="text-zinc-400 text-lg">
+                            O segredo da inteligência artificial está em <strong>como perguntar</strong>. Copie os prompts validados abaixo e cole no Gideão para gerar roteiros perfeitos para os seus vídeos em Setembro.
+                        </p>
+                    </div>
+                    <div class="relative z-10 w-full md:w-1/3 flex justify-end">
+                        <a href="https://app.g30.ai/gideao-ia" target="_blank" rel="noreferrer" class="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(249,115,22,0.5)]">
+                            <i data-lucide="bot" class="w-6 h-6"></i> Abrir Gideão IA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Prompts -->
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Prompt 1 -->
+                    <div class="bg-white border border-zinc-200 p-6 rounded-xl shadow-sm relative group">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-black text-zinc-900 flex items-center gap-2">
+                                <i data-lucide="video" class="w-5 h-5 text-orange-500"></i> Vídeo de Vendas Geral (Outubro - Antecipação Q4)
+                            </h4>
+                        </div>
+                        <div class="relative bg-zinc-50 border border-zinc-200 rounded-lg p-5 font-mono text-sm text-zinc-700 leading-relaxed">
+                            <button onclick="copyToClipboard('prompt1')" class="absolute top-3 right-3 p-2 bg-white border border-zinc-200 rounded shadow-sm hover:bg-orange-50 hover:text-orange-600 transition-colors" title="Copiar Prompt">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                            <p id="prompt1">Gideão, crie uma copy para vídeo de vendas no mês de Outubro com a metodologia G30 focado em antecipar as compras do fim de ano. Mantenha a estrutura do vídeo de vendas G30 com Gancho + Apresentação + Chamada pra ação. No gancho utilize a técnica de falar no individual, falar 3 adjetivos do veículo + Chamada pra ação clara, objetiva e direcionadora para a loja presencial.<br><br>Exemplo: "Você, que procura espaço, conforto e não abre mão da segurança, confere comigo os detalhes incríveis desse Pulse 2025 antes da alta de preços de dezembro."</p>
+                        </div>
+                    </div>
+
+                    <!-- Prompt 2 -->
+                    <div class="bg-white border border-zinc-200 p-6 rounded-xl shadow-sm relative group">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg font-black text-zinc-900 flex items-center gap-2">
+                                <i data-lucide="sparkles" class="w-5 h-5 text-orange-500"></i> Vídeo Especial - Outubro Rosa / Dia das Crianças
+                            </h4>
+                        </div>
+                        <div class="relative bg-zinc-50 border border-zinc-200 rounded-lg p-5 font-mono text-sm text-zinc-700 leading-relaxed">
+                            <button onclick="copyToClipboard('prompt3')" class="absolute top-3 right-3 p-2 bg-white border border-zinc-200 rounded shadow-sm hover:bg-orange-50 hover:text-orange-600 transition-colors" title="Copiar Prompt">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                            <p id="prompt3">Gideão, crie um roteiro para Instagram Reels com foco temático no mês de Outub
